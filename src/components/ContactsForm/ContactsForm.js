@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropsType from 'prop-types';
 import shortid from 'shortid';
+import { Form, Label, Input, AddButton } from './contactsForm.styled';
 
 class ContactsForm extends Component {
   initialState = {
@@ -42,10 +43,10 @@ class ContactsForm extends Component {
     const { name, number } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor={this.nameInputId}>
+      <Form onSubmit={this.handleSubmit}>
+        <Label htmlFor={this.nameInputId}>
           Name
-          <input
+          <Input
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -55,10 +56,10 @@ class ContactsForm extends Component {
             onChange={this.handleChange}
             id={this.nameInputId}
           />
-        </label>
-        <label htmlFor={this.numberInputId}>
+        </Label>
+        <Label htmlFor={this.numberInputId}>
           Number
-          <input
+          <Input
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -68,9 +69,9 @@ class ContactsForm extends Component {
             onChange={this.handleChange}
             id={this.numberInputId}
           />
-        </label>
-        <button type="submit">Add contact</button>
-      </form>
+        </Label>
+        <AddButton type="submit">Add contact</AddButton>
+      </Form>
     );
   }
 }

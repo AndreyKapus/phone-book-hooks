@@ -1,9 +1,10 @@
 import ContactItem from './ContactsListItem';
 import PropTypes from 'prop-types';
+import { ContactsUl } from './contactsList.styled';
 
 const ContactsList = ({ findContact, onDeleteContact }) => {
   return (
-    <ul>
+    <ContactsUl>
       {findContact().map(({ id, name, number }) => {
         return (
           <ContactItem
@@ -15,7 +16,7 @@ const ContactsList = ({ findContact, onDeleteContact }) => {
           />
         );
       })}
-    </ul>
+    </ContactsUl>
   );
 };
 
