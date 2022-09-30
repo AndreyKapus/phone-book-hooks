@@ -5,7 +5,7 @@ import { ContactsUl } from './contactsList.styled';
 const ContactsList = ({ findContact, onDeleteContact }) => {
   return (
     <ContactsUl>
-      {findContact().map(({ id, name, number }) => {
+      {findContact.map(({ id, name, number }) => {
         return (
           <ContactItem
             key={id}
@@ -20,8 +20,14 @@ const ContactsList = ({ findContact, onDeleteContact }) => {
   );
 };
 
-ContactsList.prototype = {
-  findContact: PropTypes.func.isRequired,
+ContactsList.propType = {
+  findContact: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.number.isRequired,
+    })
+  ).isRequired,
   onDeleteContact: PropTypes.func.isRequired,
 };
 

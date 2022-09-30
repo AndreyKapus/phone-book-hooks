@@ -56,6 +56,8 @@ export class App extends Component {
   };
 
   render() {
+    const visibleContacts = this.findContact();
+
     return (
       <Container>
         <h1> PhoneBook </h1>
@@ -65,7 +67,7 @@ export class App extends Component {
           <h2> Contacts </h2>
           <Filter value={this.state.filter} onChange={this.handleChange} />
           <ContactsList
-            findContact={this.findContact}
+            findContact={visibleContacts}
             onDeleteContact={this.deleteContact}
           />
         </div>
