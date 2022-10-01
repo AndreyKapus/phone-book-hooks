@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 
 const Container = ({ children }) => <div>{children}</div>;
 
-Container.propType = {
-  children: PropTypes.string.isRequired,
+Container.propTypes = {
+  children: PropTypes.array.isRequired,
 };
 
 export default Container;

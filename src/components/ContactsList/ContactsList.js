@@ -20,12 +20,12 @@ const ContactsList = ({ findContact, onDeleteContact }) => {
   );
 };
 
-ContactsList.propType = {
+ContactsList.propTypes = {
   findContact: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      number: PropTypes.number.isRequired,
+      number: PropTypes.string.isRequired,
     })
   ).isRequired,
   onDeleteContact: PropTypes.func.isRequired,
