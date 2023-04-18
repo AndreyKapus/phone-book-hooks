@@ -1,29 +1,37 @@
 import { useState } from "react"
 
-const Form = () => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+
+const Form = ({onSubmit}) => {
+  const [userName, setUserName] = useState('');
+  const [userNumber, setUserNumber] = useState('');
 
   const handleChange = (e) => {
-    e.preventDefault();
-    const {name, value} = e.target
+    const {name, value} = e.target;
 
     switch(name) {
       case 'name':
-      setName(value);
-      break;
-
-      case 'number':
-        setNumber(value);
+        setUserName(value);
         break;
 
-        default: return;
+      case 'number':
+        setUserNumber(value);
+        break;
+
+      default: return;
     }
   }
 
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      onSubmit({userName, userNumber});
+      setUserName('');
+      setUserNumber('');
+  };
+
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           <input
               type="text"
@@ -45,6 +53,7 @@ const Form = () => {
               required
           />
         </label>
+        <button type="submit">Add contact</button>
       </form>
     </>
   )
