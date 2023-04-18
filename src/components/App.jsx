@@ -1,7 +1,7 @@
 import {useState}  from 'react';
 import Form from './Form.js/Form';
-import Contacts from 'Contacts/Contacts';
-import { nanoid } from 'nanoid'
+import Contacts from 'components/Contacts/Contacts';
+import { nanoid } from 'nanoid';
 document.title = 'my App'
 // const initialContacts = [
 //       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -12,10 +12,8 @@ document.title = 'my App'
 
 export const App = () => {
 
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('contact')) ?? [];
-  })
-  const [filter, setFilter] = useState('');
+  const [contacts, setContacts] = useState([])
+  // const [filter, setFilter] = useState('');
 
   const onSubmit = ({userName, userNumber}) => {
     const contact = {
@@ -23,8 +21,9 @@ export const App = () => {
       name: userName,
       number: userNumber,
     }
-    setContacts(prevState => [...prevState, contact]);
     window.localStorage.setItem("contact", JSON.stringify(contacts))
+    setContacts(prevState => [...prevState, contact]);
+
   }
 
     return (

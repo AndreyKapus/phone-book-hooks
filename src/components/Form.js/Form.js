@@ -24,8 +24,7 @@ const Form = ({onSubmit}) => {
   const handleSubmit = (e) => {
       e.preventDefault();
       onSubmit({userName, userNumber});
-      setUserName('');
-      setUserNumber('');
+
   };
 
 
