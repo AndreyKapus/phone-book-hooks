@@ -1,7 +1,8 @@
-import {useState}  from 'react';
+import {useEffect, useState}  from 'react';
 import Form from './Form.js/Form';
 import Contacts from 'components/Contacts/Contacts';
 import { nanoid } from 'nanoid';
+import FindContact from './FindContact/FindContact';
 document.title = 'my App'
 // const initialContacts = [
 //       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -12,8 +13,10 @@ document.title = 'my App'
 
 export const App = () => {
 
-  const [contacts, setContacts] = useState([])
-  // const [filter, setFilter] = useState('');
+  const [contacts, setContacts] = useState(() => {
+    return JSON.parse(window.localStorage.getItem('contact')) ?? [];
+  })
+  const [filter, setFilter] = useState('');
 
   const onSubmit = ({userName, userNumber}) => {
     const contact = {
@@ -21,15 +24,29 @@ export const App = () => {
       name: userName,
       number: userNumber,
     }
-    window.localStorage.setItem("contact", JSON.stringify(contacts))
-    setContacts(prevState => [...prevState, contact]);
-
+    setContacts([...contacts, contact]);
   }
+
+  const filteredContactValue = (e) => {
+    setFilter(e.target.value)
+  };
+
+  const findContacts = () => {
+    const filteredContact = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.includes(filteredContact.toLowerCase())
+    )
+  }
+
+  useEffect(() => {
+    window.localStorage.setItem("contact", JSON.stringify(contacts))
+  }, [contacts])
 
     return (
         <div>
             <Form onSubmit={onSubmit}/>
-            <Contacts contactsList={contacts}/>
+            <FindContact onChangeFilter={filteredContactValue}/>
+            <Contacts contactsList={findContacts()} findContacts={findContacts}/>
         </div>
     );
   }
