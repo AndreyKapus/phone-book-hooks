@@ -3,6 +3,7 @@ import Form from './Form.js/Form';
 import Contacts from 'components/Contacts/Contacts';
 import { nanoid } from 'nanoid';
 import FindContact from './FindContact/FindContact';
+import Total from './Total/Total';
 document.title = 'my App'
 
 export const App = () => {
@@ -10,12 +11,14 @@ export const App = () => {
     return JSON.parse(window.localStorage.getItem('contact')) ?? [];
   })
   const [filter, setFilter] = useState('');
+  const [total, setTotal] = useState(0);
 
-  const onSubmit = ({userName, userNumber}) => {
+  const onSubmit = ({userName, userNumber, company}) => {
     const contact = {
       id: nanoid(),
       name: userName,
       number: userNumber,
+      company: company,
     };
 
     const existingContact = contacts.find((el) => {
@@ -44,6 +47,10 @@ export const App = () => {
 
   useEffect(() => {
     window.localStorage.setItem("contact", JSON.stringify(contacts))
+  }, [contacts]);
+
+  useEffect(() => {
+    setTotal(() => contacts.length)
   }, [contacts])
 
     return (
@@ -51,6 +58,7 @@ export const App = () => {
             <Form onSubmit={onSubmit}/>
             <FindContact onChangeFilter={filteredContactValue}/>
             <Contacts contactsList={findContacts()} onDeleteContact={deleteContact}/>
+            <Total total={total}/>
         </div>
     );
   }
