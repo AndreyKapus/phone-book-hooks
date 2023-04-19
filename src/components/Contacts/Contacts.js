@@ -1,4 +1,4 @@
-const Contacts = ({contactsList, findContacts}) => {
+const Contacts = ({contactsList, onDeleteContact}) => {
 
   return (
     <>
@@ -7,7 +7,7 @@ const Contacts = ({contactsList, findContacts}) => {
         {contactsList ? contactsList.map(({id, name, number}) => (
         <li key={id}>
           <p>{name}: {number}</p>
-          <button type="button">Delete</button>
+          <button type="button" onClick={() => onDeleteContact(id)}>Delete</button>
         </li>)): <div>Not found</div>}
       </ul>
     </>
